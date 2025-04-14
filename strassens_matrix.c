@@ -1,7 +1,7 @@
 #include<stdio.h> 
 int main() 
 { 
-int a[2][2], b[2][2], c[2][2], i, j; 
+int a[2][2], b[2][2], c[2][2], i, j;
 int m1, m2, m3, m4 , m5, m6, m7; 
 printf("Enter the 4 elements of first matrix: "); 
 for(i = 0;i < 2; i++) 
