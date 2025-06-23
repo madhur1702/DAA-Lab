@@ -1,154 +1,75 @@
 #include <stdio.h>
 
-#include <stdlib.h>
-
-int count;
-
-void quicksort(int number[], int first, int last)
-
+void swap(int *a, int *b)
 {
-
-int i, j, pivot, temp;
-
-if (first < last)
-
-{
-
-pivot = first;
-
-i = first;
-
-j = last;
-
-while (i < j)
-
-{
-
-while (number[i] <= number[pivot] && i < last)
-
-{
-
-i++;
-
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-while (number[j] > number[pivot])
-
+int partition(int arr[], int low, int high)
 {
+    int pivot = arr[low];
+    int i = low;
+    int j = high;
 
-j--;
+    while (i < j)
+    {
+        while (arr[i] <= pivot && i <= high)
+        {
+            i++;
+        }
 
+        while (arr[j] > pivot && j >= low)
+        {
+            j--;
+        }
+
+        if (i < j)
+        {
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[low], &arr[j]);
+    return j;
 }
 
-
-if (i < j)
-
+void quickSort(int arr[], int low, int high)
 {
-
-temp = number[i];
-
-number[i] = number[j];
-
-number[j] = temp;
-
-Shri Vile Parle Kelavani Mandal's INSTITUTE OF TECHNOLOGY DHULE (M.S.) DEPARMENT OF COMPUTER ENGINEERING
-
-
-Subject: DAA Lab Remark
-
-
-Name : Bhandarkar Madhur Sachin Roll No. : 35
-
-
-Class : S.Y.Computer Batch : S3 Division: A
-
-
-Expt. No. :01 Date : 05/03/2025 Signature
-
-
-Title : Using Divide and conquer method write a program to sort the list
-
-using quick sort.
-
-
-
+    if (low < high)
+    {
+        int pIndex = partition(arr, low, high);
+        quickSort(arr, low, pIndex - 1);
+        quickSort(arr, pIndex + 1, high);
+    }
 }
 
-}
-
-temp = number[pivot];
-
-number[pivot] = number[j];
-
-number[j] = temp;
-
-for(int i=0;i<count;i++)
-
+void printArray(int arr[], int size)
 {
-
-
-printf("%d ",number[i]);
-
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
 }
-
-printf("\n");
-
-quicksort(number, first, j - 1);
-
-quicksort(number, j + 1, last);
-
-}
-
-}
-
 
 int main()
-
 {
+    int n;
+    printf("Enter The total no. of Elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter the elements:\n");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
 
-scanf("%d", &count);
+    printf("Before Using quick sort:\n");
+    printArray(arr, n);
 
-int arr[count];
+    quickSort(arr, 0, n - 1);
 
+    printf("After Using quick sort:\n");
+    printArray(arr, n);
 
-for (int i = 0; i < count; i++)
-
-{
-
-scanf("%d", &arr[i]);
-
-}
-
-
-printf("Before sorting: ");
-
-for (int i = 0; i < count; i++)
-
-{
-
-printf("%d ", arr[i]);
-
-}
-
-printf("\n");
-
-
-quicksort(arr, 0, count - 1);
-
-
-printf("After sorting: ");
-
-for (int i = 0; i < count; i++)
-
-{
-
-printf("%d ", arr[i]);
-
-}
-
-printf("\n");
-
-
-return 0;
-
+    return 0;
 }
